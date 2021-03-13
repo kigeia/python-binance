@@ -19,12 +19,14 @@ class Client(object):
     FUTURES_DATA_URL = 'https://fapi.binance.{}/futures/data'
     FUTURES_COIN_URL = "https://dapi.binance.{}/dapi"
     FUTURES_COIN_DATA_URL = "https://dapi.binance.{}/futures/data"
+    SWAP_URL = 'https://api.binance.{}/sapi'/sapi/v1/bswap/pools
     PUBLIC_API_VERSION = 'v1'
     PRIVATE_API_VERSION = 'v3'
     WITHDRAW_API_VERSION = 'v3'
     MARGIN_API_VERSION = 'v1'
     FUTURES_API_VERSION = 'v1'
     FUTURES_API_VERSION2 = "v2"
+    SWAP_API_VERSION = 'v1'
 
     SYMBOL_TYPE_SPOT = 'SPOT'
 
@@ -5508,6 +5510,77 @@ class Client(object):
 
         """
         return self._request_futures_coin_api("get", "positionSide/dual", True, data=params)
+
+    def swap_list_pools(self, **params):
+        """Get metadata about all swap pools.
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('get', 'bswap/pools', True, data=params)
+
+    def swap_liquidity(self, **params):
+        """Get liquidity information and user share of a pool.
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('get', 'bswap/liquidity', True, data=params)
+    def swap_liquidity_information(self, **params):
+        """Get liquidity information and user share of a pool.
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('get', 'bswap/liquidity', True, data=params)
+
+    def swap_add_liquidity(self, **params):
+        """Add liquidity to a pool.
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('post', 'bswap/liquidityAdd', True, data=params)
+
+    def swap_remove_liquidity(self, **params):
+        """Remove liquidity from a pool, type include SINGLE and COMBINATION, asset is mandatory for single asset removal
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('post', 'bswap/liquidityRemove', True, data=params)
+
+    def swap_liquidity_ops(self, **params):
+        """Get liquidity operation (add/remove) records.
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('get', 'bswap/liquidityOps', True, data=params)
+
+    def swap_quote(self, **params):
+        """Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates.
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('get', 'bswap/quote', True, data=params)
+
+    def swap_trade(self, **params):
+        """Swap quoteAsset for baseAsset.
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('post', 'bswap/swap', True, data=params)
+
+    def swap_history(self, **params):
+        """Get swap history.
+
+        https://binance-docs.github.io/apidocs/spot/en/#bswap-endpoints
+
+        """
+        return self._request_swap_api('get', 'bswap/swap', True, data=params)
 
     def get_all_coins_info(self, **params):
         """Get information of coins (available for deposit and withdraw) for user.
