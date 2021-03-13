@@ -19,7 +19,7 @@ class Client(object):
     FUTURES_DATA_URL = 'https://fapi.binance.{}/futures/data'
     FUTURES_COIN_URL = "https://dapi.binance.{}/dapi"
     FUTURES_COIN_DATA_URL = "https://dapi.binance.{}/futures/data"
-    SWAP_URL = 'https://api.binance.{}/sapi'/sapi/v1/bswap/pools
+    SWAP_URL = 'https://api.binance.{}/sapi'
     PUBLIC_API_VERSION = 'v1'
     PRIVATE_API_VERSION = 'v3'
     WITHDRAW_API_VERSION = 'v3'
