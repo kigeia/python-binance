@@ -122,6 +122,7 @@ class Client(object):
         self.FUTURES_DATA_URL = self.FUTURES_DATA_URL.format(tld)
         self.FUTURES_COIN_URL = self.FUTURES_COIN_URL.format(tld)
         self.FUTURES_COIN_DATA_URL = self.FUTURES_COIN_DATA_URL.format(tld)
+        self.SWAP_URL = self.SWAP_URL.format(tld)
 
         self.API_KEY = api_key
         self.API_SECRET = api_secret
@@ -169,6 +170,9 @@ class Client(object):
 
     def _create_futures_coin_data_api_url(self, path, version=1):
         return self.FUTURES_COIN_DATA_URL + "/" + path
+
+    def _create_swap_api_uri(self, path, version=1):
+        return self.SWAP_URL + "/" + self.SWAP_API_VERSION + '/' + path
 
     def _generate_signature(self, data):
 
@@ -265,6 +269,11 @@ class Client(object):
 
     def _request_futures_data_api(self, method, path, signed=False, **kwargs):
         uri = self._create_futures_data_api_uri(path)
+
+        return self._request(method, uri, signed, True, **kwargs)
+
+    def _request_swap_api(self, method, path, signed=True, **kwargs):
+        uri = self._create_swap_api_uri(path)
 
         return self._request(method, uri, signed, True, **kwargs)
 
