@@ -12,14 +12,14 @@ from .exceptions import BinanceAPIException, BinanceRequestException, BinanceWit
 class Client(object):
 
     API_URL = 'https://api.binance.{}/api'
-    WITHDRAW_API_URL = 'https://api.binance.{}/wapi'
-    MARGIN_API_URL = 'https://api.binance.{}/sapi'
+    WITHDRAW_API_URL = 'https://api1.binance.{}/wapi'
+    MARGIN_API_URL = 'https://api1.binance.{}/sapi'
     WEBSITE_URL = 'https://www.binance.{}'
     FUTURES_URL = 'https://fapi.binance.{}/fapi'
     FUTURES_DATA_URL = 'https://fapi.binance.{}/futures/data'
     FUTURES_COIN_URL = "https://dapi.binance.{}/dapi"
     FUTURES_COIN_DATA_URL = "https://dapi.binance.{}/futures/data"
-    SWAP_URL = 'https://api.binance.{}/sapi'
+    SWAP_URL = 'https://api1.binance.{}/sapi'
     PUBLIC_API_VERSION = 'v1'
     PRIVATE_API_VERSION = 'v3'
     WITHDRAW_API_VERSION = 'v3'
@@ -135,7 +135,7 @@ class Client(object):
         self.ping()
         # calculate timestamp offset between local and binance server
         res = self.get_server_time()
-        self.timestamp_offset = res['serverTime'] - int(time.time() * 1000)
+        self.timestamp_offset = 0
 
     def _init_session(self):
 
@@ -4789,7 +4789,7 @@ class Client(object):
         """
         return self._request_margin_api('get', 'sub-account/transfer/subUserHistory', True, data=params)
 
-    def make_universal_transfer(self, **params):
+    #def make_universal_transfer(self, **params):
         """Universal Transfer (For Master Account)
 
         https://binance-docs.github.io/apidocs/spot/en/#universal-transfer-for-master-account
@@ -4820,7 +4820,7 @@ class Client(object):
         :raises: BinanceRequestException, BinanceAPIException
 
         """
-        return self._request_margin_api('post', 'sub-account/universalTransfer', True, data=params)
+        #return self._request_margin_api('post', 'sub-account/universalTransfer', True, data=params)
 
     def get_universal_transfer_history(self, **params):
         """Universal Transfer (For Master Account)
